@@ -8,28 +8,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
-def printDishes():
-    """
-    Prints all the available dishes
-    from the MenuItem Table
-    """
-
-    items = session.query(MenuItem).all()
-    for item in items:
-        print(item.name)
-
-
-def printRestaurant():
-    """
-    Prints all the Restaurant Names
-    from the Restaurant table.
-    """
-
-    items = session.query(Restaurant).all()
-    for item in items:
-        print(item.name)
-
-
+# Restaurant's Methods
 def addRestaurant(resturantName):
     """
     Adds a new Restaurant to the database.
@@ -39,6 +18,45 @@ def addRestaurant(resturantName):
     session.commit()
 
 
+def printRestaurant():
+    """
+    Prints all the Restaurant Names
+    from the Restaurant table.
+    """
+
+    items = session.query(Restaurant).all()
+    if items:
+        for item in items:
+            print(item.name)
+    else:
+        print("Restaurants Not Found")
+
+
+def deleteRestaurant(RestaurantName):
+    temp = session.query(Restaurant).filter_by(name=RestaurantName).one()
+    print(temp.name, "is being DELETED...")
+    session.delete(temp)
+    session.commit()
+    print("Deleted Sucessfully")
+
+
+def findRestaurant(RestaurantName):
+    """
+    Checks whether the Restaurant
+    is present in the Database or not.
+    If not present then message is printed
+    else the list of Restaurants will be printed.
+    """
+
+    temp = session.query(Restaurant).filter_by(name=RestaurantName).all()
+    if not temp:
+        print("Restaurant Not Found")
+    else:
+        for item in temp:
+            print(item.name)
+
+
+# Menu Item Methods
 def addMenuItem(
     name=None, id=None, course=None, description=None, price=None, restaurant_id=None
 ):
@@ -56,3 +74,14 @@ def addMenuItem(
     )
     session.add(temp)
     session.commit()
+
+
+def printDishes():
+    """
+    Prints all the available dishes
+    from the MenuItem Table
+    """
+
+    items = session.query(MenuItem).all()
+    for item in items:
+        print(item.name)
