@@ -8,6 +8,18 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+def printDishes():
+    items = session.query(MenuItem).all()
+    for item in items:
+        print(item.name)
+
+
+def printRestaurant():
+    items = session.query(Restaurant).all()
+    for item in items:
+        print(item.name)
+
+
 def addRestaurant(resturantName):
     temp = Restaurant(name=resturantName)
     session.add(temp)
