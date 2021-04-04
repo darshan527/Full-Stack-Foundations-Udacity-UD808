@@ -5,29 +5,31 @@ from htmlHelpers import *
 
 
 class WebServerHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        try:
-            if self.path.endswith("/restaurants"):
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
-                message = getList(getRestaurant(), False)
-                self.wfile.write(bytes(message, "utf8"))
-                print(message)
-                return
-            # else:
-            #     self.send_error(404, "File Not Found: %s" % self.path)
+    def OKResponse(self, message):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(bytes(message, "utf8"))
+        print(message)
 
-            if self.path.endswith("/hello"):
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
-                message = ""
-                message += "<html><body>Hello World!</body></html>"
-                self.wfile.write(bytes(message, "utf8"))
-                print(message)
-                return
-        except:
+    def do_GET(self):
+        if self.path.endswith("/restaurants"):
+            message = getList(getRestaurant(), False)
+            self.OKResponse(message=message)
+            return
+
+        elif self.path.endswith("/hello"):
+            message = ""
+            message += "<html><body>Hello World!</body></html>"
+            self.OKResponse(message=message)
+            return
+
+        elif self.path.endswith("/add"):
+            message = ""
+            message += getForm()
+            self.OKResponse(message=message)
+            return
+        else:
             self.send_error(404, "File Not Found: %s" % self.path)
 
 
