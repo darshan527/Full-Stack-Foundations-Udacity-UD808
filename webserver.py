@@ -1,19 +1,33 @@
 from http import server
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from helpers import *
+from htmlHelpers import *
 
 
 class WebServerHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path.endswith("/hello"):
-            self.send_response(200)
-            self.send_header("Content-type", "text/html")
-            self.end_headers()
-            message = ""
-            message += "<html><body>Hello World!</body></html>"
-            self.wfile.write(bytes(message, "utf8"))
-            print(message)
-            return
-        else:
+        try:
+            if self.path.endswith("/restaurants"):
+                self.send_response(200)
+                self.send_header("Content-type", "text/html")
+                self.end_headers()
+                message = getList(getRestaurant(), False)
+                self.wfile.write(bytes(message, "utf8"))
+                print(message)
+                return
+            # else:
+            #     self.send_error(404, "File Not Found: %s" % self.path)
+
+            if self.path.endswith("/hello"):
+                self.send_response(200)
+                self.send_header("Content-type", "text/html")
+                self.end_headers()
+                message = ""
+                message += "<html><body>Hello World!</body></html>"
+                self.wfile.write(bytes(message, "utf8"))
+                print(message)
+                return
+        except:
             self.send_error(404, "File Not Found: %s" % self.path)
 
 
