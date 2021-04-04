@@ -32,6 +32,21 @@ def printRestaurant():
         print("Restaurants Not Found")
 
 
+def getRestaurant():
+    """
+    Returns a List of all Restaurant Names
+    """
+
+    items = session.query(Restaurant).all()
+    if items:
+        l = []
+        for item in items:
+            l.append(item.name)
+        return l
+    else:
+        return []
+
+
 def deleteRestaurant(RestaurantName):
     temp = session.query(Restaurant).filter_by(name=RestaurantName).one()
     print(temp.name, "is being DELETED...")
