@@ -1,3 +1,19 @@
+from os import read
+
+
+def getHtmlPage(lst: list) -> str:
+    """
+    Generates the html page.
+    Input: list of HTML elements in str format
+    Return: HTML Page
+    """
+    s = "<!DOCTYPE html><html>"
+    for i in lst:
+        s += str(i)
+    s += "</html>"
+    return s
+
+
 def getList(lst: list, ordered: bool = True) -> str:
     """
     Returns the HTML List.
@@ -20,3 +36,10 @@ def getList(lst: list, ordered: bool = True) -> str:
             html += "<li>" + str(i) + "</li>"
         html += "</ul>"
         return html
+
+
+def getForm() -> str:
+    with open("html/tst.html", "r") as file:
+        s = file.read()
+    # print(s)
+    return s
