@@ -21,7 +21,7 @@ def addRestaurant(resturantName):
 
 def printRestaurant():
     """
-    Prints all the Restaurant Names
+    Prints all the Restaurant Name
     from the Restaurant table.
     """
 
