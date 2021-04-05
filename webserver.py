@@ -15,8 +15,8 @@ class WebServerHandler(BaseHTTPRequestHandler):
     def OKPost(self):
         self.send_response(301)
         self.end_headers()
+        ctype, prict = cgi.parse_header(self.header)
 
-        
     def do_GET(self):
         if self.path.endswith("/restaurants"):
             message = getList(getRestaurant(), False)
@@ -38,7 +38,7 @@ class WebServerHandler(BaseHTTPRequestHandler):
             self.send_error(404, "File Not Found: %s" % self.path)
 
     def do_POST(self):
-        
+        self.OKPost()
 
 
 def main():
