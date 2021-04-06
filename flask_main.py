@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
@@ -30,11 +30,7 @@ def getRestaurantById(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).first()
     items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id)
 
-    output = "<h1>" + str(restaurant.name) + "</h1></br>"
-    for i in items:
-        output += i.name + "</br>" + i.price + "</br>" + i.description
-        output += "</br></br>"
-    return output
+    return render_template("menu.html", restaurant=restaurant, items=items)
 
 
 @app.route("/restaurant/<int:restaurant_id>/addItem/")
