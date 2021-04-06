@@ -37,6 +37,11 @@ def getRestaurantById(restaurant_id):
     return output
 
 
+@app.route("/restaurant/<int:restaurant_id>/addItem/")
+def addMenuItem(restaurant_id):
+    pass
+
+
 if __name__ == "__main__":
     app.debug = True
     app.run(host="0.0.0.0", port=5000)
