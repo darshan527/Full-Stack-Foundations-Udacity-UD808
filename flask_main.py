@@ -42,6 +42,11 @@ def addMenuItem(restaurant_id):
     pass
 
 
+@app.route("/restaurant/<int:restaurant_id>/<int:menu_id>/editItem/")
+def editMenuItem(restaurant_id, menu_id):
+    pass
+
+
 if __name__ == "__main__":
     app.debug = True
     app.run(host="0.0.0.0", port=5000)
