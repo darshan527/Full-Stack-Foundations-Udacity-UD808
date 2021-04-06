@@ -48,7 +48,7 @@ def editMenuItem(restaurant_id, menu_id):
 
 
 @app.route("/restaurant/<int:restaurant_id>/<int:menu_id>/deleteItem/")
-def deleteMenuItem(restaurant_id):
+def deleteMenuItem(restaurant_id, menu_id):
     pass
 
 
