@@ -36,7 +36,12 @@ def getRestaurantById(restaurant_id):
 @app.route("/restaurant/<int:restaurant_id>/addItem/", methods=["GET", "POST"])
 def addMenuItem(restaurant_id):
     if request.method == "POST":
-        newItem = MenuItem(name=request.form["name"], restaurant_id=restaurant_id)
+        newItem = MenuItem(
+            name=request.form["name"],
+            restaurant_id=restaurant_id,
+            price=request.form["price"],
+            description=request.form["description"],
+        )
         session.add(newItem)
         session.commit()
         return redirect(url_for("getRestaurantById", restaurant_id=restaurant_id))
@@ -51,7 +56,13 @@ def editMenuItem(restaurant_id, menu_id):
 
 @app.route("/restaurant/<int:restaurant_id>/<int:menu_id>/deleteItem/")
 def deleteMenuItem(restaurant_id, menu_id):
-    pass
+    item = (
+        session.query(MenuItem).filter_by(restaurant_id=restaurant_id, id=menu_id).one()
+    )
+    session.delete(item)
+    session.commit()
+    print("Deleted successfully")
+    return redirect(url_for("getRestaurantById", restaurant_id=restaurant_id))
 
 
 if __name__ == "__main__":
