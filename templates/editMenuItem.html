@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Edit Menu Item</h1>
+    <form action="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=menu_id) }}" method="POST">
+        <label for="name">Dish Name</label>
+        <input id="name" name="name" type="text">
+        <br></br>
+        <label for="price">Dish price</label>
+        <input id="price" name="price" type="text">
+        <br></br>
+        <label for="description">Description</label>
+        <input id="description" name="description" type="text">
+        <br></br>
+        <input type="submit" value="Edit">
+        <a href="{{url_for('getRestaurantById', restaurant_id=restaurant_id) }}">Cancel Edit</a>
+    </form>
+</body>
+
+</html>
