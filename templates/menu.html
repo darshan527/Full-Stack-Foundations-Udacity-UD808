@@ -3,7 +3,7 @@
 <body>
 
     <head>
-        <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
     </head>
 
     <h1>{{restaurant.name}}</h1>
