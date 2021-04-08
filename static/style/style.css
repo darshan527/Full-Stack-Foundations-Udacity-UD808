@@ -58,7 +58,11 @@ a {
     float: left;
 }
 
-.description {}
+.description {
+    width:  50%;
+    display: inline-block;
+    float:  left;
+}
 
 .price {
     text-align: right;
